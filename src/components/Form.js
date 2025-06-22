@@ -18,7 +18,7 @@ const DISPOSITIONS = [
   'Concierge Services',
   'Consultant support',
   'Customer Support',
-  'General Enquiry',
+  // 'General Enquiry',
   'New Lead',
   'Renewals',
 ];
