@@ -141,8 +141,19 @@ export default function DispositionForm() {
     
     // If "Others" is selected, don't show disposition 2 dropdown
     if (disposition1 === 'Others') {
+      // When the user selects "Others" for Disposition 1 we intentionally
+      // do NOT show a Disposition 2 dropdown. However the backend and the
+      // front-end validation still expect a non-empty `disposition_2` value.
+      // To satisfy them we preset the field to the sentinel value "Others".
       setAvailableDisposition2([]);
       setShowCustomInput(false);
+      setValues(prev => ({
+        ...prev,
+        disposition_1: disposition1,
+        disposition_2: 'Others', // satisfy required validation
+        disposition_2_custom: ''
+      }));
+      return; // early exit – we already updated state
     } else if (disposition1 && values.call_type && dispositionHierarchy[values.call_type][disposition1]) {
       setAvailableDisposition2(dispositionHierarchy[values.call_type][disposition1]);
       setShowCustomInput(false);
